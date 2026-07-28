@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             else -> "Beginner"
         }
         val userProfile = UserProfile(username = "Developer", score = currentScore, level = level)
-        tvUserProfile.text = "Welcome, ${userProfile.username}!"
+        tvUserProfile.text = "Welcome, ${userProfile.username}! (${userProfile.getBadge()})"
         tvScore.text = userProfile.getFormattedScore()
     }
 
