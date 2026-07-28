@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">practice</string>
+    <string name="app_name">Practice</string>
+    <string name="welcome_user">Welcome, Developer!</string>
+    <string name="btn_add_points">Add 10 Points</string>
+    <string name="btn_reset_score">Reset Score</string>
+    <string name="msg_score_reset">Score reset to 0</string>
 </resources>
