@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">practice</string>
+    <string name="app_name">Practice</string>
+    <string name="title_counter">Interactive Practice Counter v2</string>
+    <string name="btn_increment">Increment (+1)</string>
+    <string name="btn_decrement">Decrement (-1)</string>
+    <string name="btn_reset">Reset</string>
+    <string name="msg_reset">Counter reset to 0</string>
 </resources>
