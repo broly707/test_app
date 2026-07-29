@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">practice</string>
+    <string name="app_name">Practice</string>
+    <string name="app_greeting">Hello Gibberish PR Test!</string>
 </resources>
