@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">practice</string>
+    <string name="app_name">Practice</string>
+    <string name="welcome_title">User Overview Dashboard</string>
+    <string name="btn_add_score">Add 10 Points</string>
+    <string name="btn_reset_score">Reset Metrics</string>
+    <string name="msg_reset">Dashboard metrics reset successfully</string>
 </resources>
