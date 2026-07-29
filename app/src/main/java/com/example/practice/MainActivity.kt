@@ -9,6 +9,7 @@ import com.google.android.material.button.MaterialButton
 
 /**
  * MainActivity - Interactive Practice App with User Dashboard
+ * // Trigger AI PR review update
  */
 class MainActivity : AppCompatActivity() {
 
