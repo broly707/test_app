@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">practice</string>
+    <string name="app_name">Practice</string>
+    <string name="info_text">New PR with Empty Description</string>
 </resources>
