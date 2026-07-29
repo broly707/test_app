@@ -12,6 +12,7 @@ import com.google.android.material.button.MaterialButton
  * // Trigger AI PR review update
  * // x7q9_asdf_ghjkl_gibberish_trigger_review_test
  * // 1-paragraph gibberish update test
+ * // Separate title and description gibberish commit test
  */
 class MainActivity : AppCompatActivity() {
 
