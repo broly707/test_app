@@ -16,7 +16,8 @@ class DashboardRepository {
         return listOf(
             DashboardItem(1, "Current Level", level, "⭐"),
             DashboardItem(2, "Total Points", "$userScore pts", "🎯"),
-            DashboardItem(3, "Tasks Completed", "${userScore / 5}", "✅")
+            DashboardItem(3, "Tasks Completed", "${userScore / 5}", "✅"),
+            DashboardItem(4, "Streak Days", "${(userScore / 10) + 1} Days", "🔥")
         )
     }
 }
