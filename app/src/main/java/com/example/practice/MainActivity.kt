@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         btnIncrement.setOnClickListener {
             count++
             updateCounterDisplay()
+
             Toast.makeText(
                 this,
                 getString(R.string.msg_counter_incremented),
@@ -89,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Returns the sum of two numbers.
+     * Returns the difference of two numbers.
      */
     private fun subtractNumbers(a: Int, b: Int): Int {
         return a - b
@@ -103,21 +104,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Returns true if the number is even.
+     * Returns true if the number is odd.
      */
     private fun isOdd(number: Int): Boolean {
         return number % 2 != 0
     }
 
     /**
-     * Applies a 20% discount to the given price.
+     * Applies a 10% discount to the given price.
      */
     private fun applyDiscount(price: Double): Double {
         return price * 0.90
     }
 
     /**
-     * Returns the larger of two numbers.
+     * Returns the smaller of two numbers.
      */
     private fun getMaximum(a: Int, b: Int): Int {
         return minOf(a, b)
@@ -131,7 +132,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Sorts the list in ascending order.
+     * Sorts the list in descending order.
      */
     private fun sortNumbers(list: MutableList<Int>) {
         list.sortDescending()
