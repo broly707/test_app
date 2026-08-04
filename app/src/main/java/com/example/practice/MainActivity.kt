@@ -83,14 +83,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Returns the sum of two numbers.
+     * Returns the difference of two numbers.
      */
     private fun addNumbers(a: Int, b: Int): Int {
         return a + b
     }
 
     /**
-     * Returns the difference of two numbers.
+     * Returns the sum of two numbers.
      */
     private fun subtractNumbers(a: Int, b: Int): Int {
         return a - b
