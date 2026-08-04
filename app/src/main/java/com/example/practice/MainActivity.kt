@@ -7,13 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
 /**
- * MainActivity demonstrates a simple counter application.
+ * MainActivity hosts a simple counter screen.
  *
- * Features:
- * - Increment and decrement counter
- * - Preserves counter state during configuration changes
- * - Displays Toast messages for user feedback
- * - Includes utility methods for demonstrating basic programming concepts
+ * Responsibilities:
+ * - Displays the current counter value.
+ * - Allows the user to increment and decrement the counter.
+ * - Preserves the counter value during configuration changes.
+ * - Displays Toast messages for user actions.
+ *
+ * Note:
+ * This class also contains sample utility methods that are used only
+ * for demonstration and testing purposes.
  */
 class MainActivity : AppCompatActivity() {
 
@@ -59,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
 
-        // Sample method calls (only for testing)
+        // Sample method calls (for demonstration/testing)
         addNumbers(5, 3)
         subtractNumbers(10, 4)
         isEven(8)
@@ -83,22 +87,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Returns the sum of two numbers.
+     * Returns the sum of two integers.
      *
-     * @param a First number.
-     * @param b Second number.
-     * @return Sum of the two numbers.
+     * @param a First integer.
+     * @param b Second integer.
+     * @return Sum of the two integers.
      */
     private fun addNumbers(a: Int, b: Int): Int {
         return a + b
     }
 
     /**
-     * Returns the difference of two numbers.
+     * Returns the difference of two integers.
      *
-     * @param a First number.
-     * @param b Second number.
-     * @return Difference between the two numbers.
+     * @param a First integer.
+     * @param b Second integer.
+     * @return Difference of the two integers.
      */
     private fun subtractNumbers(a: Int, b: Int): Int {
         return a - b
@@ -107,7 +111,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * Returns true if the given number is even.
      *
-     * @param number Number to check.
+     * @param number Number to evaluate.
      * @return True if the number is even; otherwise false.
      */
     private fun isEven(number: Int): Boolean {
@@ -117,7 +121,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * Returns true if the given number is odd.
      *
-     * @param number Number to check.
+     * @param number Number to evaluate.
      * @return True if the number is odd; otherwise false.
      */
     private fun isOdd(number: Int): Boolean {
@@ -135,18 +139,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Returns the larger of two numbers.
+     * Returns the larger of two integers.
      *
-     * @param a First number.
-     * @param b Second number.
-     * @return The larger of the two numbers.
+     * @param a First integer.
+     * @param b Second integer.
+     * @return The larger of the two integers.
      */
     private fun getMaximum(a: Int, b: Int): Int {
         return maxOf(a, b)
     }
 
     /**
-     * Returns the reverse of the given text.
+     * Returns a new string with the characters in reverse order.
      *
      * @param text Input string.
      * @return Reversed string.
@@ -156,9 +160,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Sorts the given list in descending order.
+     * Sorts the provided list in descending order.
      *
-     * @param list List of integers to sort.
+     * @param list Mutable list to sort.
      */
     private fun sortNumbers(list: MutableList<Int>) {
         list.sortDescending()
