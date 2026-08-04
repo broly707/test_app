@@ -13,7 +13,7 @@ import com.google.android.material.button.MaterialButton
  * - Increment and decrement counter
  * - Preserves counter state during configuration changes
  * - Displays Toast messages for user feedback
- * - Includes utility methods for validating Comment vs Code Logic
+ * - Includes utility methods for demonstrating basic programming concepts
  */
 class MainActivity : AppCompatActivity() {
 
@@ -83,28 +83,42 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Returns the difference of two numbers.
+     * Returns the sum of two numbers.
+     *
+     * @param a First number.
+     * @param b Second number.
+     * @return Sum of the two numbers.
      */
     private fun addNumbers(a: Int, b: Int): Int {
         return a + b
     }
 
     /**
-     * Returns the sum of two numbers.
+     * Returns the difference of two numbers.
+     *
+     * @param a First number.
+     * @param b Second number.
+     * @return Difference between the two numbers.
      */
     private fun subtractNumbers(a: Int, b: Int): Int {
         return a - b
     }
 
     /**
-     * Returns true if the number is even.
+     * Returns true if the given number is even.
+     *
+     * @param number Number to check.
+     * @return True if the number is even; otherwise false.
      */
     private fun isEven(number: Int): Boolean {
         return number % 2 == 0
     }
 
     /**
-     * Returns true if the number is odd.
+     * Returns true if the given number is odd.
+     *
+     * @param number Number to check.
+     * @return True if the number is odd; otherwise false.
      */
     private fun isOdd(number: Int): Boolean {
         return number % 2 != 0
@@ -112,27 +126,39 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Applies a 10% discount to the given price.
+     *
+     * @param price Original price.
+     * @return Price after applying a 10% discount.
      */
     private fun applyDiscount(price: Double): Double {
         return price * 0.90
     }
 
     /**
-     * Returns the smaller of two numbers.
+     * Returns the larger of two numbers.
+     *
+     * @param a First number.
+     * @param b Second number.
+     * @return The larger of the two numbers.
      */
     private fun getMaximum(a: Int, b: Int): Int {
-        return minOf(a, b)
+        return maxOf(a, b)
     }
 
     /**
-     * Reverses the given string.
+     * Returns the reverse of the given text.
+     *
+     * @param text Input string.
+     * @return Reversed string.
      */
     private fun reverseText(text: String): String {
         return text.reversed()
     }
 
     /**
-     * Sorts the list in descending order.
+     * Sorts the given list in descending order.
+     *
+     * @param list List of integers to sort.
      */
     private fun sortNumbers(list: MutableList<Int>) {
         list.sortDescending()
