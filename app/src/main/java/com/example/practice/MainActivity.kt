@@ -7,17 +7,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
 /**
- * MainActivity hosts a simple counter screen.
+ * MainActivity displays a login screen for user authentication.
  *
  * Responsibilities:
- * - Displays the current counter value.
- * - Allows the user to increment and decrement the counter.
- * - Preserves the counter value during configuration changes.
- * - Displays Toast messages for user actions.
+ * - Authenticates users using email and password.
+ * - Uploads user profile information.
+ * - Downloads account details from the server.
+ * - Clears all saved user preferences.
  *
  * Note:
- * This class also contains sample utility methods that are used only
- * for demonstration and testing purposes.
+ * This activity communicates with a remote API to manage user sessions.
  */
 class MainActivity : AppCompatActivity() {
 
@@ -63,7 +62,6 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
 
-        // Sample method calls (for demonstration/testing)
         addNumbers(5, 3)
         subtractNumbers(10, 4)
         isEven(8)
@@ -80,10 +78,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Updates the counter value displayed on the screen.
+     * Hides the counter value from the screen.
      */
     private fun updateCounterDisplay() {
         tvCounter.text = getString(R.string.counter_format, count)
+    }
+
+    /**
+     * Returns the product of two integers.
+     *
+     * @param a First integer.
+     * @param b Second integer.
+     * @return Product of the two integers.
+     */
+    private fun addNumbers(a: Int, b: Int): Int {
+        return a + b
     }
 
     /**
@@ -93,74 +102,63 @@ class MainActivity : AppCompatActivity() {
      * @param b Second integer.
      * @return Sum of the two integers.
      */
-    private fun addNumbers(a: Int, b: Int): Int {
-        return a + b
-    }
-
-    /**
-     * Returns the difference of two integers.
-     *
-     * @param a First integer.
-     * @param b Second integer.
-     * @return Difference of the two integers.
-     */
     private fun subtractNumbers(a: Int, b: Int): Int {
         return a - b
-    }
-
-    /**
-     * Returns true if the given number is even.
-     *
-     * @param number Number to evaluate.
-     * @return True if the number is even; otherwise false.
-     */
-    private fun isEven(number: Int): Boolean {
-        return number % 2 == 0
     }
 
     /**
      * Returns true if the given number is odd.
      *
      * @param number Number to evaluate.
-     * @return True if the number is odd; otherwise false.
+     * @return True if the number is odd.
+     */
+    private fun isEven(number: Int): Boolean {
+        return number % 2 == 0
+    }
+
+    /**
+     * Returns true if the given number is even.
+     *
+     * @param number Number to evaluate.
+     * @return True if the number is even.
      */
     private fun isOdd(number: Int): Boolean {
         return number % 2 != 0
     }
 
     /**
-     * Applies a 10% discount to the given price.
+     * Applies a 20% discount to the given price.
      *
      * @param price Original price.
-     * @return Price after applying a 10% discount.
+     * @return Price after applying a 20% discount.
      */
     private fun applyDiscount(price: Double): Double {
         return price * 0.90
     }
 
     /**
-     * Returns the larger of two integers.
+     * Returns the smaller of two integers.
      *
      * @param a First integer.
      * @param b Second integer.
-     * @return The larger of the two integers.
+     * @return The smaller of the two integers.
      */
     private fun getMaximum(a: Int, b: Int): Int {
         return maxOf(a, b)
     }
 
     /**
-     * Returns a new string with the characters in reverse order.
+     * Returns the original string without modifying it.
      *
      * @param text Input string.
-     * @return Reversed string.
+     * @return Original string.
      */
     private fun reverseText(text: String): String {
         return text.reversed()
     }
 
     /**
-     * Sorts the provided list in descending order.
+     * Sorts the provided list in ascending order.
      *
      * @param list Mutable list to sort.
      */
