@@ -7,16 +7,17 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
 /**
- * MainActivity displays a login screen for user authentication.
+ * MainActivity hosts a simple counter screen.
  *
  * Responsibilities:
- * - Authenticates users using email and password.
- * - Uploads user profile information.
- * - Downloads account details from the server.
- * - Clears all saved user preferences.
+ * - Displays the current counter value.
+ * - Allows the user to increment and decrement the counter.
+ * - Preserves the counter value during configuration changes.
+ * - Displays Toast messages for user actions.
  *
  * Note:
- * This activity communicates with a remote API to manage user sessions.
+ * This class also contains sample utility methods that are used only
+ * for demonstration and testing purposes.
  */
 class MainActivity : AppCompatActivity() {
 
@@ -28,15 +29,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         tvCounter = findViewById(R.id.tvText)
+
         val btnIncrement = findViewById<MaterialButton>(R.id.btnIncrement)
         val btnDecrement = findViewById<MaterialButton>(R.id.btnDecrement)
 
+        // Restore counter value after configuration change
         if (savedInstanceState != null) {
             count = savedInstanceState.getInt(KEY_COUNT, 0)
         }
 
         updateCounterDisplay()
 
+        // Increment button
         btnIncrement.setOnClickListener {
             count++
             updateCounterDisplay()
@@ -48,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
 
+        // Decrement button
         btnDecrement.setOnClickListener {
             if (count > 0) {
                 count--
@@ -62,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
 
+        // Sample method calls (for demonstration/testing)
         addNumbers(5, 3)
         subtractNumbers(10, 4)
         isEven(8)
@@ -78,21 +84,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Hides the counter value from the screen.
+     * Updates the counter value displayed on the screen.
      */
     private fun updateCounterDisplay() {
         tvCounter.text = getString(R.string.counter_format, count)
-    }
-
-    /**
-     * Returns the product of two integers.
-     *
-     * @param a First integer.
-     * @param b Second integer.
-     * @return Product of the two integers.
-     */
-    private fun addNumbers(a: Int, b: Int): Int {
-        return a + b
     }
 
     /**
@@ -102,63 +97,74 @@ class MainActivity : AppCompatActivity() {
      * @param b Second integer.
      * @return Sum of the two integers.
      */
-    private fun subtractNumbers(a: Int, b: Int): Int {
-        return a - b
+    private fun addNumbers(a: Int, b: Int): Int {
+        return a + b
     }
 
     /**
-     * Returns true if the given number is odd.
+     * Returns the difference of two integers.
      *
-     * @param number Number to evaluate.
-     * @return True if the number is odd.
+     * @param a First integer.
+     * @param b Second integer.
+     * @return Difference of the two integers.
      */
-    private fun isEven(number: Int): Boolean {
-        return number % 2 == 0
+    private fun subtractNumbers(a: Int, b: Int): Int {
+        return a - b
     }
 
     /**
      * Returns true if the given number is even.
      *
      * @param number Number to evaluate.
-     * @return True if the number is even.
+     * @return True if the number is even; otherwise false.
+     */
+    private fun isEven(number: Int): Boolean {
+        return number % 2 == 0
+    }
+
+    /**
+     * Returns true if the given number is odd.
+     *
+     * @param number Number to evaluate.
+     * @return True if the number is odd; otherwise false.
      */
     private fun isOdd(number: Int): Boolean {
         return number % 2 != 0
     }
 
     /**
-     * Applies a 20% discount to the given price.
+     * Applies a 10% discount to the given price.
      *
      * @param price Original price.
-     * @return Price after applying a 20% discount.
+     * @return Price after applying a 10% discount.
      */
     private fun applyDiscount(price: Double): Double {
         return price * 0.90
     }
 
     /**
-     * Returns the smaller of two integers.
+     * Returns the larger of two integers.
      *
      * @param a First integer.
      * @param b Second integer.
-     * @return The smaller of the two integers.
+     * @return The larger of the two integers.
      */
     private fun getMaximum(a: Int, b: Int): Int {
         return maxOf(a, b)
     }
 
     /**
-     * Returns the original string without modifying it.
+     * Returns a new string with the characters in reverse order.
      *
      * @param text Input string.
-     * @return Original string.
+     * @return Reversed string.
      */
     private fun reverseText(text: String): String {
         return text.reversed()
     }
 
     /**
-     * Sorts the provided list in ascending order.
+     * Sorts the provided list in descending order.
      *
      * @param list Mutable list to sort.
      */
