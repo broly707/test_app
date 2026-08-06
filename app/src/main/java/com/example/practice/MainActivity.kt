@@ -1,178 +1,127 @@
 package com.example.practice
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.button.MaterialButton
 
-/**
- * MainActivity hosts a simple counter screen.
- *
- * Responsibilities:
- * - Displays the current counter value.
- * - Allows the user to increment and decrement the counter.
- * - Preserves the counter value during configuration changes.
- * - Displays Toast messages for user actions.
- *
- * Note:
- * This class also contains sample utility methods that are used only
- * for demonstration and testing purposes.
- */
 class MainActivity : AppCompatActivity() {
 
-    private var count = 0
-    private lateinit var tvCounter: TextView
+    lateinit var tvCounter: TextView
+    var count = 0
+    var userName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
 
-        tvCounter = findViewById(R.id.tvText)
+        tvCounter = findViewById(R.id.tvCounter)
 
-        val btnIncrement = findViewById<MaterialButton>(R.id.btnIncrement)
-        val btnDecrement = findViewById<MaterialButton>(R.id.btnDecrement)
+        val btnIncrement = findViewById<Button>(R.id.btnIncrement)
+        val btnDecrement = findViewById<Button>(R.id.btnDecrement)
 
-        // Restore counter value after configuration change
-        if (savedInstanceState != null) {
-            count = savedInstanceState.getInt(KEY_COUNT, 0)
-        }
+        Log.d("DEBUG", "Application Started")
+        Log.e("ERROR", "This is just a test error")
 
-        updateCounterDisplay()
-
-        // Increment button
         btnIncrement.setOnClickListener {
+
             count++
-            updateCounterDisplay()
+
+            tvCounter.text = count.toString()
 
             Toast.makeText(
                 this,
-                getString(R.string.msg_counter_incremented),
+                "Incremented",
                 Toast.LENGTH_SHORT
             ).show()
+
+            Log.d("Counter", count.toString())
+
+            val result = addNumbers(10,20)
         }
 
-        // Decrement button
         btnDecrement.setOnClickListener {
-            if (count > 0) {
-                count--
-            }
 
-            updateCounterDisplay()
+            count--
+
+            tvCounter.text = count.toString()
 
             Toast.makeText(
                 this,
-                getString(R.string.msg_counter_decremented),
+                "Decremented",
                 Toast.LENGTH_SHORT
             ).show()
+
+            Log.d("Counter", count.toString())
         }
 
-        // Sample method calls (for demonstration/testing)
-        addNumbers(5, 3)
-        subtractNumbers(10, 4)
-        isEven(8)
+        // Unsafe null assertion
+        println(userName!!.length)
+
+        // Division by zero
+        val x = 10 / 0
+
+        // Dead code
+        if (false) {
+            println("Never Executes")
+        }
+
+        // Duplicate code
+        Log.d("TAG","Duplicate")
+        Log.d("TAG","Duplicate")
+
+        // Unused variables
+        val temp = 100
+        val temp2 = "Hello"
+
+        // Magic numbers
+        if(count > 999){
+            Toast.makeText(this,"Large Count",Toast.LENGTH_SHORT).show()
+        }
+
+        // Empty catch block
+        try{
+            val y = 10 / 0
+        }catch (e:Exception){
+
+        }
+
+        // Hardcoded string
+        tvCounter.text = "Counter Value"
+
+        // Long method chain
+        val text = "ChatGPT".trim().uppercase().lowercase().reversed()
+
+        // Unused method calls
+        addNumbers(4,5)
+        subtractNumbers(8,2)
+        reverseText("Android")
+        isEven(6)
         isOdd(7)
-        applyDiscount(100.0)
-        getMaximum(12, 20)
-        reverseText("ChatGPT")
-        sortNumbers(mutableListOf(5, 2, 8, 1))
+
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt(KEY_COUNT, count)
+    fun addNumbers(a:Int,b:Int):Int{
+        return a+b
     }
 
-    /**
-     * Updates the counter value displayed on the screen.
-     */
-    private fun updateCounterDisplay() {
-        tvCounter.text = getString(R.string.counter_format, count)
+    fun subtractNumbers(a:Int,b:Int):Int{
+        return a-b
     }
 
-    /**
-     * Returns the sum of two integers.
-     *
-     * @param a First integer.
-     * @param b Second integer.
-     * @return Sum of the two integers.
-     */
-    private fun addNumbers(a: Int, b: Int): Int {
-        return a + b
-    }
-
-    /**
-     * Returns the difference of two integers.
-     *
-     * @param a First integer.
-     * @param b Second integer.
-     * @return Difference of the two integers.
-     */
-    private fun subtractNumbers(a: Int, b: Int): Int {
-        return a - b
-    }
-
-    /**
-     * Returns true if the given number is even.
-     *
-     * @param number Number to evaluate.
-     * @return True if the number is even; otherwise false.
-     */
-    private fun isEven(number: Int): Boolean {
-        return number % 2 == 0
-    }
-
-    /**
-     * Returns true if the given number is odd.
-     *
-     * @param number Number to evaluate.
-     * @return True if the number is odd; otherwise false.
-     */
-    private fun isOdd(number: Int): Boolean {
-        return number % 2 != 0
-    }
-
-    /**
-     * Applies a 10% discount to the given price.
-     *
-     * @param price Original price.
-     * @return Price after applying a 10% discount.
-     */
-    private fun applyDiscount(price: Double): Double {
-        return price * 0.90
-    }
-
-    /**
-     * Returns the larger of two integers.
-     *
-     * @param a First integer.
-     * @param b Second integer.
-     * @return The larger of the two integers.
-     */
-    private fun getMaximum(a: Int, b: Int): Int {
-        return maxOf(a, b)
-    }
-
-    /**
-     * Returns a new string with the characters in reverse order.
-     *
-     * @param text Input string.
-     * @return Reversed string.
-     */
-    private fun reverseText(text: String): String {
+    fun reverseText(text:String):String{
         return text.reversed()
     }
 
-    /**
-     * Sorts the provided list in descending order.
-     *
-     * @param list Mutable list to sort.
-     */
-    private fun sortNumbers(list: MutableList<Int>) {
-        list.sortDescending()
+    fun isEven(number:Int):Boolean{
+        return number%2==0
     }
 
-    companion object {
-        private const val KEY_COUNT = "key_count"
+    fun isOdd(number:Int):Boolean{
+        return number%2!=0
     }
+
 }
