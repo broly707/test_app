@@ -1,4 +1,3 @@
-```kotlin
 package com.example.practice
 
 import android.os.Bundle
@@ -8,173 +7,154 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
 /**
- * MainActivity hosts a simple counter screen.
+ * MainActivity displays a simple student grade calculator.
  *
  * Responsibilities:
- * - Displays the current counter value.
- * - Allows the user to increment and decrement the counter.
- * - Preserves the counter value during configuration changes.
- * - Displays Toast messages for user actions.
+ * - Increases and decreases marks.
+ * - Calculates grades.
+ * - Displays pass/fail status.
+ * - Saves marks during configuration changes.
  *
  * Note:
- * This class also contains sample utility methods that are used only
- * for demonstration and testing purposes.
+ * This class contains several utility methods for
+ * demonstration and AI testing purposes.
  */
 class MainActivity : AppCompatActivity() {
 
-    private var count = 0
-    private lateinit var tvCounter: TextView
+    private var marks = 50
+    private lateinit var tvMarks: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tvCounter = findViewById(R.id.tvText)
+        tvMarks = findViewById(R.id.tvText)
 
-        val btnIncrement = findViewById<MaterialButton>(R.id.btnIncrement)
-        val btnDecrement = findViewById<MaterialButton>(R.id.btnDecrement)
+        val btnIncrease = findViewById<MaterialButton>(R.id.btnIncrement)
+        val btnDecrease = findViewById<MaterialButton>(R.id.btnDecrement)
 
-        // Restore counter value after configuration change
         if (savedInstanceState != null) {
-            count = savedInstanceState.getInt(KEY_COUNT, 0)
+            marks = savedInstanceState.getInt(KEY_MARKS, 50)
         }
 
-        updateCounterDisplay()
+        updateMarks()
 
-        // Increment button
-        btnIncrement.setOnClickListener {
-            count++
-            updateCounterDisplay()
-
-            Toast.makeText(
-                this,
-                getString(R.string.msg_counter_incremented),
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-
-        // Decrement button
-        btnDecrement.setOnClickListener {
-            if (count > 0) {
-                count--
+        btnIncrease.setOnClickListener {
+            if (marks < 100) {
+                marks += 5
             }
 
-            updateCounterDisplay()
+            updateMarks()
 
             Toast.makeText(
                 this,
-                getString(R.string.msg_counter_decremented),
+                "Marks Increased",
                 Toast.LENGTH_SHORT
             ).show()
         }
 
-        // Sample method calls (for demonstration/testing)
-        addNumbers(5, 3)
-        subtractNumbers(10, 4)
-        isEven(8)
-        isOdd(7)
-        applyDiscount(100.0)
-        getMaximum(12, 20)
-        reverseText("ChatGPT")
-        sortNumbers(mutableListOf(5, 2, 8, 1))
+        btnDecrease.setOnClickListener {
+            if (marks > 0) {
+                marks -= 5
+            }
+
+            updateMarks()
+
+            Toast.makeText(
+                this,
+                "Marks Decreased",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        // Sample method calls
+        calculateGrade(marks)
+        isPassed(marks)
+        calculatePercentage(450, 500)
+        findAverage(listOf(80, 75, 90, 95))
+        getHighestMark(listOf(55, 78, 89, 96))
+        getLowestMark(listOf(55, 78, 89, 96))
+        capitalizeName("mahendra")
+        sortMarks(mutableListOf(60, 90, 75, 45))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(KEY_COUNT, count)
+        outState.putInt(KEY_MARKS, marks)
     }
 
     /**
-     * Updates the counter value displayed on the screen.
+     * Updates the marks displayed on screen.
      */
-    private fun updateCounterDisplay() {
-        tvCounter.text = getString(R.string.counter_format, count)
+    private fun updateMarks() {
+        tvMarks.text = "Marks: $marks"
     }
 
     /**
-     * Returns the sum of two integers.
-     *
-     * @param a First integer.
-     * @param b Second integer.
-     * @return Sum of the two integers.
+     * Returns the grade based on marks.
      */
-    private fun addNumbers(a: Int, b: Int): Int {
-        return a + b
+    private fun calculateGrade(marks: Int): String {
+        return when {
+            marks >= 90 -> "A"
+            marks >= 80 -> "B"
+            marks >= 70 -> "C"
+            marks >= 60 -> "D"
+            else -> "F"
+        }
     }
 
     /**
-     * Returns the difference of two integers.
-     *
-     * @param a First integer.
-     * @param b Second integer.
-     * @return Difference of the two integers.
+     * Returns true if student has passed.
      */
-    private fun subtractNumbers(a: Int, b: Int): Int {
-        return a - b
+    private fun isPassed(marks: Int): Boolean {
+        return marks >= 35
     }
 
     /**
-     * Returns true if the given number is even.
-     *
-     * @param number Number to evaluate.
-     * @return True if the number is even; otherwise false.
+     * Calculates percentage.
      */
-    private fun isEven(number: Int): Boolean {
-        return number % 2 == 0
+    private fun calculatePercentage(obtained: Int, total: Int): Double {
+        return (obtained.toDouble() / total) * 100
     }
 
     /**
-     * Returns true if the given number is odd.
-     *
-     * @param number Number to evaluate.
-     * @return True if the number is odd; otherwise false.
+     * Returns average marks.
      */
-    private fun isOdd(number: Int): Boolean {
-        return number % 2 != 0
+    private fun findAverage(marks: List<Int>): Double {
+        return marks.average()
     }
 
     /**
-     * Applies a 10% discount to the given price.
-     *
-     * @param price Original price.
-     * @return Price after applying a 10% discount.
+     * Returns highest mark.
      */
-    private fun applyDiscount(price: Double): Double {
-        return price * 0.90
+    private fun getHighestMark(marks: List<Int>): Int {
+        return marks.maxOrNull() ?: 0
     }
 
     /**
-     * Returns the larger of two integers.
-     *
-     * @param a First integer.
-     * @param b Second integer.
-     * @return The larger of the two integers.
+     * Returns lowest mark.
      */
-    private fun getMaximum(a: Int, b: Int): Int {
-        return maxOf(a, b)
+    private fun getLowestMark(marks: List<Int>): Int {
+        return marks.minOrNull() ?: 0
     }
 
     /**
-     * Returns a new string with the characters in reverse order.
-     *
-     * @param text Input string.
-     * @return Reversed string.
+     * Capitalizes the student's name.
      */
-    private fun reverseText(text: String): String {
-        return text.reversed()
+    private fun capitalizeName(name: String): String {
+        return name.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase() else it.toString()
+        }
     }
 
     /**
-     * Sorts the provided list in descending order.
-     *
-     * @param list Mutable list to sort.
+     * Sorts marks in ascending order.
      */
-    private fun sortNumbers(list: MutableList<Int>) {
-        list.sortDescending()
+    private fun sortMarks(list: MutableList<Int>) {
+        list.sort()
     }
 
     companion object {
-        private const val KEY_COUNT = "key_count"
+        private const val KEY_MARKS = "key_marks"
     }
 }
-```
