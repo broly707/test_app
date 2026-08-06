@@ -3,96 +3,79 @@ package com.example.practice
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.TextView
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
-    private lateinit var tvStatus: TextView
-    private var count = 0
-    private var userName: String? = null
-    private val apiKey = "sk_test_123456789" // Hardcoded secret
+    private lateinit var etEmail: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var btnRegister: Button
+
+    private val apiUrl = "http://api.example.com/register"
+    private val apiKey = "123456789abcdef"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_register)
 
-        tvStatus = findViewById(R.id.tvStatus)
+        etEmail = findViewById(R.id.etEmail)
+        etPassword = findViewById(R.id.etPassword)
+        btnRegister = findViewById(R.id.btnRegister)
 
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
+        btnRegister.setOnClickListener {
 
-        Log.d("MainActivity", "Application Started")
+            val email = etEmail.text.toString()
+            val password = etPassword.text.toString()
 
-        btnLogin.setOnClickListener {
+            Log.d("REGISTER", "Email : $email")
+            Log.d("REGISTER", "Password : $password")
 
-            // Hardcoded UI string
-            tvStatus.text = "Welcome User"
+            if(email == ""){
+                Toast.makeText(this,"Enter Email",Toast.LENGTH_SHORT).show()
+            }
 
-            // Hardcoded Toast message
-            Toast.makeText(
-                this,
-                "Login Successful",
-                Toast.LENGTH_SHORT
-            ).show()
+            if(password == ""){
+                Toast.makeText(this,"Enter Password",Toast.LENGTH_SHORT).show()
+            }
 
-            // Unsafe null assertion
-            println(userName!!.length)
+            if(email.contains("@")){
+                Log.d("EMAIL","Valid")
+            }else{
+                Log.d("EMAIL","Invalid")
+            }
 
-            // Division by zero
             val result = 100 / 0
 
-            // Dead code
-            if (false) {
-                Log.d("TEST", "Never Executes")
+            val temp = "Testing"
+
+            val number = 9999
+
+            if(false){
+                println("Never executed")
             }
 
-            // Duplicate log
-            Log.d("CLICK", "Button Clicked")
-            Log.d("CLICK", "Button Clicked")
-
-            // Unused variables
-            val temp = 10
-            val message = "Android"
-
-            // Magic number
-            if (count > 999) {
-                Toast.makeText(this, "Large Count", Toast.LENGTH_SHORT).show()
-            }
-
-            // Empty catch block
-            try {
-                val value = 10 / 0
-            } catch (e: Exception) {
+            try{
+                Thread.sleep(5000)
+            }catch (e:Exception){
 
             }
 
-            // Long method chain
-            val text =
-                "Artificial Intelligence".trim().uppercase().lowercase().reversed()
+            registerUser(email,password)
 
-            // Unused return values
-            addNumbers(10, 20)
-            reverse("ChatGPT")
-            isEven(8)
+            registerUser(email,password)
 
-            // TODO left in production
-            TODO("Implement login API")
-
-            // Blocking UI thread
-            Thread.sleep(3000)
+            TODO("Implement API call")
         }
     }
 
-    fun addNumbers(a: Int, b: Int): Int {
-        return a + b
-    }
+    fun registerUser(email:String,password:String):Boolean{
 
-    fun reverse(text: String): String {
-        return text.reversed()
-    }
+        Log.d("API",apiUrl)
 
-    fun isEven(number: Int): Boolean {
-        return number % 2 == 0
+        val response = true
+
+        return response
     }
 }
