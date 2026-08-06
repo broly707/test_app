@@ -9,86 +9,90 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var tvResult: TextView
-    var count = 0
-    var userName: String? = null
-    var password = "admin123"              // Hardcoded secret
+    private lateinit var tvStatus: TextView
+    private var count = 0
+    private var userName: String? = null
+    private val apiKey = "sk_test_123456789" // Hardcoded secret
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
 
-        tvResult = findViewById(R.id.tvResult)
+        tvStatus = findViewById(R.id.tvStatus)
 
         val btnLogin = findViewById<Button>(R.id.btnLogin)
 
-        Log.d("APP", "Application Started")
-        Log.e("PASSWORD", password)
+        Log.d("MainActivity", "Application Started")
 
         btnLogin.setOnClickListener {
 
-            count++
+            // Hardcoded UI string
+            tvStatus.text = "Welcome User"
 
-            tvResult.text = "Welcome " + userName
-
+            // Hardcoded Toast message
             Toast.makeText(
                 this,
                 "Login Successful",
                 Toast.LENGTH_SHORT
             ).show()
 
+            // Unsafe null assertion
             println(userName!!.length)
 
+            // Division by zero
             val result = 100 / 0
 
-            if(false){
-                println("Never executes")
+            // Dead code
+            if (false) {
+                Log.d("TEST", "Never Executes")
             }
 
-            if(count == 100){
-                Toast.makeText(this,"Winner",Toast.LENGTH_SHORT).show()
+            // Duplicate log
+            Log.d("CLICK", "Button Clicked")
+            Log.d("CLICK", "Button Clicked")
+
+            // Unused variables
+            val temp = 10
+            val message = "Android"
+
+            // Magic number
+            if (count > 999) {
+                Toast.makeText(this, "Large Count", Toast.LENGTH_SHORT).show()
             }
 
-            Log.d("TAG","Clicked")
-            Log.d("TAG","Clicked")
-
-            val temp = 50
-            val name = "Android"
-
-            calculateSalary(10000)
-            reverse("OpenAI")
-            isEven(10)
-
-            try{
-                val x = 10/0
-            }catch (e:Exception){
+            // Empty catch block
+            try {
+                val value = 10 / 0
+            } catch (e: Exception) {
 
             }
 
-            val text = "ChatGPT".trim().uppercase().lowercase().reversed()
+            // Long method chain
+            val text =
+                "Artificial Intelligence".trim().uppercase().lowercase().reversed()
 
-            val list = mutableListOf(1,2,3)
-            list.removeAt(10)
+            // Unused return values
+            addNumbers(10, 20)
+            reverse("ChatGPT")
+            isEven(8)
 
+            // TODO left in production
+            TODO("Implement login API")
+
+            // Blocking UI thread
             Thread.sleep(3000)
-
-            TODO("Implement login")
-
         }
-
     }
 
-    fun calculateSalary(amount:Int):Int{
-        return amount * 2
+    fun addNumbers(a: Int, b: Int): Int {
+        return a + b
     }
 
-    fun reverse(text:String):String{
+    fun reverse(text: String): String {
         return text.reversed()
     }
 
-    fun isEven(number:Int):Boolean{
-        return number%2==0
+    fun isEven(number: Int): Boolean {
+        return number % 2 == 0
     }
-
 }
