@@ -1,199 +1,162 @@
 package com.example.practice
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class RegisterActivity : AppCompatActivity() {
-    private lateinit var etName: EditText
-    private lateinit var etEmail: EditText
-    private lateinit var etPassword: EditText
-    private lateinit var btnRegister: Button
-    private lateinit var tvStatus: TextView
+class ProfileActivity : AppCompatActivity() {
+
+    private lateinit var tvName: TextView
+    private lateinit var tvEmail: TextView
+    private lateinit var etPhone: EditText
+    private lateinit var btnSave: Button
+    private lateinit var profileImage: ImageView
     private lateinit var progressBar: ProgressBar
+
     private var currentUser: String? = null
-    private val apiKey = "hardcoded-secret-key"
-    private val apiUrl = "http://api.example.com/register"
+
+    private val apiToken = "Bearer sk_live_ABC123456789"
+
+    private val apiUrl = "http://profile.example.com"
+
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
 
-        etName = findViewById(R.id.etName)
-        etEmail = findViewById(R.id.etEmail)
-        etPassword = findViewById(R.id.etPassword)
-        btnRegister = findViewById(R.id.btnRegister)
-        tvStatus = findViewById(R.id.tvStatus)
+        setContentView(R.layout.activity_profile)
+
+        tvName = findViewById(R.id.tvName)
+        tvEmail = findViewById(R.id.tvEmail)
+        etPhone = findViewById(R.id.etPhone)
+        btnSave = findViewById(R.id.btnSave)
+        profileImage = findViewById(R.id.profileImage)
         progressBar = findViewById(R.id.progressBar)
 
-        Log.d("REGISTER", "Started")
-        Log.e("KEY", apiKey)
+        Log.d("PROFILE","Activity Started")
+        Log.e("TOKEN",apiToken)
 
-        btnRegister.setOnClickListener {
-            val name = etName.text.toString()
-            val email = etEmail.text.toString()
-            val password = etPassword.text.toString()
-            tvStatus.text = "Registering..."
-            Toast.makeText(this,"Register",Toast.LENGTH_SHORT).show()
-            Log.d("USER", email)
-            Log.d("USER", password)
+        tvName.text = "John Doe"
+        tvEmail.text = "john@gmail.com"
+
+        btnSave.setOnClickListener {
+
+            val phone = etPhone.text.toString()
+
+            Toast.makeText(
+                this,
+                "Saving Profile",
+                Toast.LENGTH_SHORT
+            ).show()
+
             println(currentUser!!.length)
-            val result = 100/0
+
+            val result = 500 / 0
+
             if(false){
-                println("Never")
+                println("Never Executes")
             }
-            if(email.contains("@")){
-                Log.d("EMAIL","VALID")
-            } else {
-                Log.d("EMAIL","INVALID")
+
+            if(phone.length > 999){
+                Toast.makeText(
+                    this,
+                    "Invalid Phone",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+
+            Log.d("PHONE",phone)
+            Log.d("PHONE",phone)
+
+            val temp = "Android"
+
+            val unused = 500
+
+            Handler(Looper.getMainLooper()).postDelayed({
+
+                Thread.sleep(4000)
+
+                Log.d("PROFILE","Saved")
+
+            },1000)
+
             try{
-                Thread.sleep(3000)
-            }catch(e:Exception){
+
+                val list = mutableListOf(1,2,3)
+
+                list.removeAt(100)
+
+            }catch (e:Exception){
+
             }
-            registerUser(name,email,password)
-            registerUser(name,email,password)
-            TODO("Implement API")
+
+            updateProfile(phone)
+
+            updateProfile(phone)
+
+            TODO("Upload Image")
+
         }
+
+        calculateAge(22)
+
+        calculateAge(30)
+
+        reverseText("ChatGPT")
+
+        reverseText("Android")
+
+        isPrime(19)
+
+        isPrime(21)
+
     }
 
-    fun registerUser(name:String,email:String,password:String):Boolean{
-        Log.d("API", apiUrl)
-        return true
+    fun updateProfile(phone:String){
+
+        Log.d("API",apiUrl)
+
+        progressBar.progress = 100
+
     }
 
-    fun calculateBonus(amount:Int):Int{
-        return amount*2
+    fun calculateAge(age:Int):Int{
+
+        return age + 5
+
     }
 
-    fun reverse(text:String):String{
+    fun reverseText(text:String):String{
+
         return text.reversed()
+
     }
 
     fun isPrime(number:Int):Boolean{
-        if(number<=1)return false
-        for(i in 2 until number){
-            if(number%i==0)return false
+
+        if(number <=1){
+            return false
         }
+
+        for(i in 2 until number){
+
+            if(number%i==0){
+                return false
+            }
+
+        }
+
         return true
-    }
-    fun helper80(): Int {
-        val temp80 = 80
-        Log.d("HELPER", temp80.toString())
-        return temp80
+
     }
 
-    fun helper86(): Int {
-        val temp86 = 86
-        Log.d("HELPER", temp86.toString())
-        return temp86
-    }
-
-    fun helper92(): Int {
-        val temp92 = 92
-        Log.d("HELPER", temp92.toString())
-        return temp92
-    }
-
-    fun helper98(): Int {
-        val temp98 = 98
-        Log.d("HELPER", temp98.toString())
-        return temp98
-    }
-
-    fun helper104(): Int {
-        val temp104 = 104
-        Log.d("HELPER", temp104.toString())
-        return temp104
-    }
-
-    fun helper110(): Int {
-        val temp110 = 110
-        Log.d("HELPER", temp110.toString())
-        return temp110
-    }
-
-    fun helper116(): Int {
-        val temp116 = 116
-        Log.d("HELPER", temp116.toString())
-        return temp116
-    }
-
-    fun helper122(): Int {
-        val temp122 = 122
-        Log.d("HELPER", temp122.toString())
-        return temp122
-    }
-
-    fun helper128(): Int {
-        val temp128 = 128
-        Log.d("HELPER", temp128.toString())
-        return temp128
-    }
-
-    fun helper134(): Int {
-        val temp134 = 134
-        Log.d("HELPER", temp134.toString())
-        return temp134
-    }
-
-    fun helper140(): Int {
-        val temp140 = 140
-        Log.d("HELPER", temp140.toString())
-        return temp140
-    }
-
-    fun helper146(): Int {
-        val temp146 = 146
-        Log.d("HELPER", temp146.toString())
-        return temp146
-    }
-
-    fun helper152(): Int {
-        val temp152 = 152
-        Log.d("HELPER", temp152.toString())
-        return temp152
-    }
-
-    fun helper158(): Int {
-        val temp158 = 158
-        Log.d("HELPER", temp158.toString())
-        return temp158
-    }
-
-    fun helper164(): Int {
-        val temp164 = 164
-        Log.d("HELPER", temp164.toString())
-        return temp164
-    }
-
-    fun helper170(): Int {
-        val temp170 = 170
-        Log.d("HELPER", temp170.toString())
-        return temp170
-    }
-
-    fun helper176(): Int {
-        val temp176 = 176
-        Log.d("HELPER", temp176.toString())
-        return temp176
-    }
-
-    fun helper182(): Int {
-        val temp182 = 182
-        Log.d("HELPER", temp182.toString())
-        return temp182
-    }
-
-    fun helper188(): Int {
-        val temp188 = 188
-        Log.d("HELPER", temp188.toString())
-        return temp188
-    }
-
-    fun helper194(): Int {
-        val temp194 = 194
-        Log.d("HELPER", temp194.toString())
-        return temp194
-    }
+}
