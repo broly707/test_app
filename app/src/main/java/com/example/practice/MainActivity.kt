@@ -7,130 +7,172 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
 /**
- * MainActivity hosts a simple temperature converter.
+ * MainActivity hosts a simple counter screen.
  *
  * Responsibilities:
- * - Increases and decreases the Celsius value.
- * - Converts Celsius to Fahrenheit.
- * - Displays conversion results.
- * - Preserves the temperature across configuration changes.
+ * - Displays the current counter value.
+ * - Allows the user to increment and decrement the counter.
+ * - Preserves the counter value during configuration changes.
+ * - Displays Toast messages for user actions.
  *
  * Note:
- * This class also contains helper methods used for demonstration
- * and testing purposes.
+ * This class also contains sample utility methods that are used only
+ * for demonstration and testing purposes.
  */
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var tvTemperature: TextView
-    private var celsius = 25
+    private var count = 0
+    private lateinit var tvCounter: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        tvTemperature = findViewById(R.id.tvText)
+        tvCounter = findViewById(R.id.tvText)
 
-        val btnIncrease = findViewById<MaterialButton>(R.id.btnIncrement)
-        val btnDecrease = findViewById<MaterialButton>(R.id.btnDecrement)
+        val btnIncrement = findViewById<MaterialButton>(R.id.btnIncrement)
+        val btnDecrement = findViewById<MaterialButton>(R.id.btnDecrement)
 
+        // Restore counter value after configuration change
         if (savedInstanceState != null) {
-            celsius = savedInstanceState.getInt(KEY_TEMP, 25)
+            count = savedInstanceState.getInt(KEY_COUNT, 0)
         }
 
-        updateTemperature()
+        updateCounterDisplay()
 
-        btnIncrease.setOnClickListener {
-            celsius++
-            updateTemperature()
+        // Increment button
+        btnIncrement.setOnClickListener {
+            count++
+            updateCounterDisplay()
 
             Toast.makeText(
                 this,
-                "Temperature Increased",
+                getString(R.string.msg_counter_incremented),
                 Toast.LENGTH_SHORT
             ).show()
         }
 
-        btnDecrease.setOnClickListener {
-            celsius--
-            updateTemperature()
+        // Decrement button
+        btnDecrement.setOnClickListener {
+            if (count > 0) {
+                count--
+            }
+
+            updateCounterDisplay()
 
             Toast.makeText(
                 this,
-                "Temperature Decreased",
+                getString(R.string.msg_counter_decremented),
                 Toast.LENGTH_SHORT
             ).show()
         }
 
-        convertToFahrenheit(celsius)
-        isFreezing(celsius)
-        averageTemperature(listOf(20, 22, 24, 26))
-        highestTemperature(listOf(15, 20, 30, 28))
-        lowestTemperature(listOf(15, 20, 30, 28))
+        // Sample method calls (for demonstration/testing)
+        addNumbers(5, 3)
+        subtractNumbers(10, 4)
+        isEven(8)
+        isOdd(7)
+        applyDiscount(100.0)
+        getMaximum(12, 20)
+        reverseText("ChatGPT")
+        sortNumbers(mutableListOf(5, 2, 8, 1))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(KEY_TEMP, celsius)
+        outState.putInt(KEY_COUNT, count)
     }
 
     /**
-     * Updates the current temperature displayed on screen.
+     * Updates the counter value displayed on the screen.
      */
-    private fun updateTemperature() {
-        tvTemperature.text = "Temperature: $celsius°C"
+    private fun updateCounterDisplay() {
+        tvCounter.text = getString(R.string.counter_format, count)
     }
 
     /**
-     * Converts Celsius to Fahrenheit.
+     * Returns the sum of two integers.
      *
-     * @param celsius Temperature in Celsius.
-     * @return Temperature in Fahrenheit.
+     * @param a First integer.
+     * @param b Second integer.
+     * @return Sum of the two integers.
      */
-    private fun convertToFahrenheit(celsius: Int): Double {
-        return (celsius * 9 / 5.0) + 32
+    private fun addNumbers(a: Int, b: Int): Int {
+        return a + b
     }
 
     /**
-     * Determines whether the temperature is at or below freezing.
+     * Returns the difference of two integers.
      *
-     * @param celsius Temperature in Celsius.
-     * @return True if the temperature is 0°C or below.
+     * @param a First integer.
+     * @param b Second integer.
+     * @return Difference of the two integers.
      */
-    private fun isFreezing(celsius: Int): Boolean {
-        return celsius <= 0
+    private fun subtractNumbers(a: Int, b: Int): Int {
+        return a - b
     }
 
     /**
-     * Calculates the average temperature.
+     * Returns true if the given number is even.
      *
-     * @param values List of temperature values.
-     * @return Average temperature.
+     * @param number Number to evaluate.
+     * @return True if the number is even; otherwise false.
      */
-    private fun averageTemperature(values: List<Int>): Double {
-        return values.average()
+    private fun isEven(number: Int): Boolean {
+        return number % 2 == 0
     }
 
     /**
-     * Returns the highest temperature from the list.
+     * Returns true if the given number is odd.
      *
-     * @param values List of temperatures.
-     * @return Highest temperature.
+     * @param number Number to evaluate.
+     * @return True if the number is odd; otherwise false.
      */
-    private fun highestTemperature(values: List<Int>): Int {
-        return values.maxOrNull() ?: 0
+    private fun isOdd(number: Int): Boolean {
+        return number % 2 != 0
     }
 
     /**
-     * Returns the lowest temperature from the list.
+     * Applies a 10% discount to the given price.
      *
-     * @param values List of temperatures.
-     * @return Lowest temperature.
+     * @param price Original price.
+     * @return Price after applying a 10% discount.
      */
-    private fun lowestTemperature(values: List<Int>): Int {
-        return values.minOrNull() ?: 0
+    private fun applyDiscount(price: Double): Double {
+        return price * 0.90
+    }
+
+    /**
+     * Returns the larger of two integers.
+     *
+     * @param a First integer.
+     * @param b Second integer.
+     * @return The larger of the two integers.
+     */
+    private fun getMaximum(a: Int, b: Int): Int {
+        return maxOf(a, b)
+    }
+
+    /**
+     * Returns a new string with the characters in reverse order.
+     *
+     * @param text Input string.
+     * @return Reversed string.
+     */
+    private fun reverseText(text: String): String {
+        return text.reversed()
+    }
+
+    /**
+     * Sorts the provided list in descending order.
+     *
+     * @param list Mutable list to sort.
+     */
+    private fun sortNumbers(list: MutableList<Int>) {
+        list.sortDescending()
     }
 
     companion object {
-        private const val KEY_TEMP = "key_temperature"
+        private const val KEY_COUNT = "key_count"
     }
 }
