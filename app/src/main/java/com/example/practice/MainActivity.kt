@@ -9,119 +9,86 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var tvCounter: TextView
+    lateinit var tvResult: TextView
     var count = 0
     var userName: String? = null
+    var password = "admin123"              // Hardcoded secret
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
 
-        tvCounter = findViewById(R.id.tvCounter)
+        tvResult = findViewById(R.id.tvResult)
 
-        val btnIncrement = findViewById<Button>(R.id.btnIncrement)
-        val btnDecrement = findViewById<Button>(R.id.btnDecrement)
+        val btnLogin = findViewById<Button>(R.id.btnLogin)
 
-        Log.d("DEBUG", "Application Started")
-        Log.e("ERROR", "This is just a test error")
+        Log.d("APP", "Application Started")
+        Log.e("PASSWORD", password)
 
-        btnIncrement.setOnClickListener {
+        btnLogin.setOnClickListener {
 
             count++
 
-            tvCounter.text = count.toString()
+            tvResult.text = "Welcome " + userName
 
             Toast.makeText(
                 this,
-                "Incremented",
+                "Login Successful",
                 Toast.LENGTH_SHORT
             ).show()
 
-            Log.d("Counter", count.toString())
+            println(userName!!.length)
 
-            val result = addNumbers(10,20)
-        }
+            val result = 100 / 0
 
-        btnDecrement.setOnClickListener {
+            if(false){
+                println("Never executes")
+            }
 
-            count--
+            if(count == 100){
+                Toast.makeText(this,"Winner",Toast.LENGTH_SHORT).show()
+            }
 
-            tvCounter.text = count.toString()
+            Log.d("TAG","Clicked")
+            Log.d("TAG","Clicked")
 
-            Toast.makeText(
-                this,
-                "Decremented",
-                Toast.LENGTH_SHORT
-            ).show()
+            val temp = 50
+            val name = "Android"
 
-            Log.d("Counter", count.toString())
-        }
+            calculateSalary(10000)
+            reverse("OpenAI")
+            isEven(10)
 
-        // Unsafe null assertion
-        println(userName!!.length)
+            try{
+                val x = 10/0
+            }catch (e:Exception){
 
-        // Division by zero
-        val x = 10 / 0
+            }
 
-        // Dead code
-        if (false) {
-            println("Never Executes")
-        }
+            val text = "ChatGPT".trim().uppercase().lowercase().reversed()
 
-        // Duplicate code
-        Log.d("TAG","Duplicate")
-        Log.d("TAG","Duplicate")
+            val list = mutableListOf(1,2,3)
+            list.removeAt(10)
 
-        // Unused variables
-        val temp = 100
-        val temp2 = "Hello"
+            Thread.sleep(3000)
 
-        // Magic numbers
-        if(count > 999){
-            Toast.makeText(this,"Large Count",Toast.LENGTH_SHORT).show()
-        }
-
-        // Empty catch block
-        try{
-            val y = 10 / 0
-        }catch (e:Exception){
+            TODO("Implement login")
 
         }
-
-        // Hardcoded string
-        tvCounter.text = "Counter Value"
-
-        // Long method chain
-        val text = "ChatGPT".trim().uppercase().lowercase().reversed()
-
-        // Unused method calls
-        addNumbers(4,5)
-        subtractNumbers(8,2)
-        reverseText("Android")
-        isEven(6)
-        isOdd(7)
 
     }
 
-    fun addNumbers(a:Int,b:Int):Int{
-        return a+b
+    fun calculateSalary(amount:Int):Int{
+        return amount * 2
     }
 
-    fun subtractNumbers(a:Int,b:Int):Int{
-        return a-b
-    }
-
-    fun reverseText(text:String):String{
+    fun reverse(text:String):String{
         return text.reversed()
     }
 
     fun isEven(number:Int):Boolean{
         return number%2==0
-    }
-
-    fun isOdd(number:Int):Boolean{
-        return number%2!=0
     }
 
 }
