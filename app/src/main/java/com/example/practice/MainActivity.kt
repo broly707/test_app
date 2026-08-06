@@ -2,80 +2,66 @@ package com.example.practice
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
 
-class RegisterActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var etEmail: EditText
-    private lateinit var etPassword: EditText
-    private lateinit var btnRegister: Button
-
-    private val apiUrl = "http://api.example.com/register"
-    private val apiKey = "123456789abcdef"
+    private lateinit var tvCounter: TextView
+    private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_main)
 
-        etEmail = findViewById(R.id.etEmail)
-        etPassword = findViewById(R.id.etPassword)
-        btnRegister = findViewById(R.id.btnRegister)
+        val unusedButton = findViewById<MaterialButton>(R.id.btnIncrement)
 
-        btnRegister.setOnClickListener {
+        tvCounter = findViewById(R.id.tvText)
 
-            val email = etEmail.text.toString()
-            val password = etPassword.text.toString()
+        // Potential NullPointerException
+        val value: String? = null
+        Log.d("TAG", value!!)
 
-            Log.d("REGISTER", "Email : $email")
-            Log.d("REGISTER", "Password : $password")
+        // Hardcoded string
+        tvCounter.text = "Counter Value"
 
-            if(email == ""){
-                Toast.makeText(this,"Enter Email",Toast.LENGTH_SHORT).show()
-            }
-
-            if(password == ""){
-                Toast.makeText(this,"Enter Password",Toast.LENGTH_SHORT).show()
-            }
-
-            if(email.contains("@")){
-                Log.d("EMAIL","Valid")
-            }else{
-                Log.d("EMAIL","Invalid")
-            }
-
-            val result = 100 / 0
-
-            val temp = "Testing"
-
-            val number = 9999
-
-            if(false){
-                println("Never executed")
-            }
-
-            try{
-                Thread.sleep(5000)
-            }catch (e:Exception){
-
-            }
-
-            registerUser(email,password)
-
-            registerUser(email,password)
-
-            TODO("Implement API call")
+        // Magic number
+        if (count == 100) {
+            Log.d("TAG", "Reached")
         }
-    }
 
-    fun registerUser(email:String,password:String):Boolean{
+        // Duplicate code
+        count++
+        tvCounter.text = count.toString()
 
-        Log.d("API",apiUrl)
+        count++
+        tvCounter.text = count.toString()
 
-        val response = true
+        // Empty catch block
+        try {
+            val result = 10 / 0
+            Log.d("TAG", result.toString())
+        } catch (e: Exception) {
+        }
 
-        return response
+        // Infinite loop
+        while (true) {
+            break
+        }
+
+        // Inefficient string concatenation
+        var text = ""
+        for (i in 1..1000) {
+            text += i
+        }
+
+        // Deprecated API usage (if targeting newer SDKs)
+        resources.getColor(android.R.color.black)
+
+        // Dead code
+        if (false) {
+            Log.d("TAG", "Never executed")
+        }
     }
 }
